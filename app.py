@@ -17,11 +17,6 @@ app = Flask(__name__)
 def index():
 
     # Importing
-    import os
-    path = "/Users/HP/OneDrive/Documents/Python Anaconda/Flask_Salary_App/Salary_2021"
-    os.chdir(path)
-    os.listdir()
-
     df = pd.read_csv('survey_clean.csv')
 
     # PUSH
@@ -101,11 +96,6 @@ def predict():
     print(type(APL))
 
     # Importing
-    import os
-    path = "/Users/HP/OneDrive/Documents/Python Anaconda/Flask_Salary_App/Salary_2021"
-    os.chdir(path)
-    os.listdir()
-
     df = pd.read_csv('survey_clean.csv')
 
     # Outliers categorical
