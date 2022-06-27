@@ -1,1 +1,496 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="description" content="salary predictor">
+    <meta name="keywords" content="salary predictor, jaroslav kotrba">
+    <meta name="author" content="Jaroslav Kotrba">
+    
+    <link rel="shortcut icon" href={{ url_for('static', filename='logo.png') }}>
+    <!-- <link rel="shortcut icon" type="image/png" href="images/logo.png"> -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Salary Predictor</title>
+  </head>
+  <body class="bg-dark">
+      <div class="container">
+          <div class="row">
+              <div class="card" style="width: 100%; height: 100%; margin-top: 64px">
+                <div class="card-header" style="text-align: center">
+                    <h1>IT Developer <span style="color:#1f77b4">Salary Prediction</span> in 2022</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" accept-charset="utf-8">
+                        <div class="row">
+                            
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>Select Country:</b></label>
+                                <select class="select-picker form-control" id="country" name="country" required="1">
+                                    {% for country in countries %}
+                                        <option value="{{ country }}">{{ country }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>Select Education:</b></label>
+                                <select class="select-picker form-control" id="education" name="education" required="1">
+                                    {% for education in educations %}
+                                    <option value="{{ education }}">{{ education }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>Select Years of Coding:</b></label>
+                                <select class="select-picker form-control" id="year" name="year" required="1">
+                                    {% for year in years %}
+                                    <option value="{{ year }}">{{ year }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+        
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>Select Organization Type:</b></label>
+                                <select class="select-picker form-control" id="organization" name="organization" required="1">
+                                    {% for organization in organizations %}
+                                    <option value="{{ organization }}">{{ organization }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>Select Operation System:</b></label>
+                                <select class="select-picker form-control" id="system" name="system" required="1">
+                                    {% for system in systems %}
+                                    <option value="{{ system }}">{{ system }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>Select Age Group:</b></label>
+                                <select class="select-picker form-control" id="age" name="age" required="1">
+                                    {% for age in ages %}
+                                    <option value="{{ age }}">{{ age }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <br>
+
+                            <h2 style="text-align: center; padding-top: 15px">Configure your <span style="color:#1f77b4">Coding Profile</span> below: </h2>
+                            <p style="text-align: center; padding-top: 15px">The coding languages have different weights - so they can have positive or even negative impact on your salary forecasted only from the general fields.</p>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">APL</span>":</b></label>
+                                <select class="select-picker form-control" id="APL" name="APL" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Assembly</span>":</b></label>
+                                <select class="select-picker form-control" id="Assembly" name="Assembly" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Bash/Shell</span>":</b></label>
+                                <select class="select-picker form-control" id="Bash_Shell" name="Bash_Shell" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">C</span>":</b></label>
+                                <select class="select-picker form-control" id="C" name="C" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">C#</span>":</b></label>
+                                <select class="select-picker form-control" id="C_sharp" name="C_sharp" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">C++</span>":</b></label>
+                                <select class="select-picker form-control" id="C_plus_plus" name="C_plus_plus" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">COBOL</span>":</b></label>
+                                <select class="select-picker form-control" id="COBOL" name="COBOL" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Clojure</span>":</b></label>
+                                <select class="select-picker form-control" id="Clojure" name="Clojure" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Crystal</span>":</b></label>
+                                <select class="select-picker form-control" id="Crystal" name="Crystal" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Dart</span>":</b></label>
+                                <select class="select-picker form-control" id="Dart" name="Dart" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Delphi</span>":</b></label>
+                                <select class="select-picker form-control" id="Delphi" name="Delphi" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Elixir</span>":</b></label>
+                                <select class="select-picker form-control" id="Elixir" name="Elixir" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Erlang</span>":</b></label>
+                                <select class="select-picker form-control" id="Erlang" name="Erlang" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">F#</span>":</b></label>
+                                <select class="select-picker form-control" id="F_sharp" name="F_sharp" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Go</span>":</b></label>
+                                <select class="select-picker form-control" id="Go" name="Go" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Groovy</span>":</b></label>
+                                <select class="select-picker form-control" id="Groovy" name="Groovy" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">HTML/CSS</span>":</b></label>
+                                <select class="select-picker form-control" id="HTML_CSS" name="HTML_CSS" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Haskell</span>":</b></label>
+                                <select class="select-picker form-control" id="Haskell" name="Haskell" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Java</span>":</b></label>
+                                <select class="select-picker form-control" id="Java" name="Java" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">JavaScript</span>":</b></label>
+                                <select class="select-picker form-control" id="JavaScript" name="JavaScript" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Julia</span>":</b></label>
+                                <select class="select-picker form-control" id="Julia" name="Julia" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Kotlin</span>":</b></label>
+                                <select class="select-picker form-control" id="Kotlin" name="Kotlin" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">LISP</span>":</b></label>
+                                <select class="select-picker form-control" id="LISP" name="LISP" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Matlab</span>":</b></label>
+                                <select class="select-picker form-control" id="Matlab" name="Matlab" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Node.js</span>":</b></label>
+                                <select class="select-picker form-control" id="Node_js" name="Node_js" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Objective-C</span>":</b></label>
+                                <select class="select-picker form-control" id="Objective_C" name="Objective_C" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">PHP</span>":</b></label>
+                                <select class="select-picker form-control" id="PHP" name="PHP" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Perl</span>":</b></label>
+                                <select class="select-picker form-control" id="Perl" name="Perl" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">PowerShell</span>":</b></label>
+                                <select class="select-picker form-control" id="PowerShell" name="PowerShell" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Python</span>":</b></label>
+                                <select class="select-picker form-control" id="Python" name="Python" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">R</span>":</b></label>
+                                <select class="select-picker form-control" id="R" name="R" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Ruby</span>":</b></label>
+                                <select class="select-picker form-control" id="Ruby" name="Ruby" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Rust</span>":</b></label>
+                                <select class="select-picker form-control" id="Rust" name="Rust" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">SQL</span>":</b></label>
+                                <select class="select-picker form-control" id="SQL" name="SQL" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Scala</span>":</b></label>
+                                <select class="select-picker form-control" id="Scala" name="Scala" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">Swift</span>":</b></label>
+                                <select class="select-picker form-control" id="Swift" name="Swift" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">TypeScript</span>":</b></label>
+                                <select class="select-picker form-control" id="TypeScript" name="TypeScript" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group" style="text-align: center; padding-top: 15px">
+                                <label><b>I code in "<span style="color:#1f77b4">VBA</span>":</b></label>
+                                <select class="select-picker form-control" id="VBA" name="VBA" required="required"> 
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>  
+                            
+                            <div class="col-md-12 form-group" style="padding: 32px 0px 0px 0px">
+                                <button class="btn btn-primary form-control" onclick="send_data()">Predict Salary</button>
+                            </div>
+
+                        </div>
+                    </form>
+                   
+                    <br>
+
+                    <div class="col-md-12" style="text-align: center">
+                        <h3><span id="prediction_USD"></span></h3>
+                        <h3><span id="prediction_EUR"></span></h3>
+                        <h3><span id="prediction_CZK"></span></h3>
+                        <h3><span id="model"></span></h3>
+                        
+                        <h3><span id="space"></span></h3>
+
+                        <h3><span id="accuracy"></span></h3>
+                        <h3><span id="MAE"></span></h3>
+                        <h3><span id="RMSE"></span></h3>
+                        <h3><span id="R2"></span></h3>
+                    </div>
+
+                    <br>
+
+                    <!-- Visualisation -->
+                    {%block content%}
+                    <div class="card mb-4 m-auto" style="width: 90%">
+                        <div class="card-body">
+                            <div id="chart1"></div>
+                        </div>
+                    </div>
+                    {% endblock %}
+
+                    <br>
+
+                    <div class="contact">
+                        <p>Source data: <a href="https://insights.stackoverflow.com/survey/2021" target="_blank" style="text-decoration: none">https://insights.stackoverflow.com/survey/2021</a></p>
+                        <p>See other projects: <a href="https://jaroslavkotrba.com" target="_blank" style="text-decoration: none">https://jaroslavkotrba.com</a></p>
+                        <br>
+                        <p style="font-size: 12px">Copyright © 2022 All rights reserved</p>
+                    </div>
+
+                </div>
+          </div>
+      </div>
+
+    <!-- Model -->
+    <script>
+        function form_handler(event){
+            event.preventDefault(); // do not submit the form normally
+        }
+
+        function send_data()
+        {
+            document.querySelector('form').addEventListener("submit", form_handler);
+
+            var fd= new FormData(document.querySelector('form'));
+
+            var xhr= new XMLHttpRequest();
+
+            xhr.open('POST', '/predict', true);
+            document.getElementById("prediction_USD").innerHTML = "Please wait predicting salary...";
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == XMLHttpRequest.DONE){
+                    let result = JSON.parse(xhr.responseText);
+                    document.getElementById('prediction_USD').innerHTML = `The estimated salary: USD ${result.prediction} per year.`;
+                    document.getElementById('prediction_EUR').innerHTML = `The estimated salary: EUR ${(result.prediction*0.95).toFixed(2)} per year.`;
+                    document.getElementById('prediction_CZK').innerHTML = `The estimated salary: CZK ${(result.prediction*23.50/12).toFixed(2)} per month.`;
+
+                    document.getElementById('model').innerHTML = 'Model: Linear Regression';
+                    
+                    document.getElementById('space').innerHTML = '-----------------------------';
+                    
+                    document.getElementById('accuracy').innerHTML = 'Accuracy of the model: ';
+                    document.getElementById('MAE').innerHTML = `MAE: ${result.MAE}`;
+                    document.getElementById('RMSE').innerHTML = `RMSE: ${result.RMSE}`;
+                    document.getElementById('R2').innerHTML = `R2: ${result.R2}`;
+                };
+            
+            };
+
+            xhr.onload = function(){};
+            xhr.send(fd);
+
+        }
+    </script>
+    
+    <!-- Plotly -->
+    
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
+        var graph1 = {{ graphJSON1 | safe}};
+        Plotly.newPlot("chart1", graph1, {});
+    </script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+  </body>
+</html>
