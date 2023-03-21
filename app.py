@@ -127,7 +127,7 @@ def predict():
 
     # Linear regression
     from sklearn.linear_model import LinearRegression # CHANGE
-    model = LinearRegression(normalize=True) # CHANGE
+    model = LinearRegression() # CHANGE
 
     from sklearn.pipeline import make_pipeline
     pipe = make_pipeline(column_trans, scaler, model)
